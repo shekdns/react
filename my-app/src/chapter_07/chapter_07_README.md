@@ -71,12 +71,48 @@ useMemo() 훅을 사용하면 컴포넌트가 다시 렌더링 될 때마다 \
 ```
 useCallback( function, dependencies) == useMemo( () => function, dependencies ) 와 동일 \
 
+### NOTE ) 메모이제이션 ( Memoization )
+useMemo()와 useCallback() 훅에서는 메모이제이션 이라는 개념이 있음 \
+메모이제이션은 최적화를 위해서 사용하는 개념
 
+## 5. useRef
+레퍼런스를 사용하기 위한 훅 \
+리액트에서 래퍼런스란 특정 컴포넌트에 접근할 수 있는 객체를 의미 \
+래퍼런스 객체에는 .current라는 속성이 있는데 현재 래퍼런스(참조)하고 있는 엘리먼트를 의미 \
 
+### `문법 `
+```c
+  const refContainer = useRef( 초깃값 );
+  //초기값이 NULL 이면 .current의 값이 null은 래퍼런스 값이 반환
+```
+useRef()는 변경 가능한 .current라는 속성을 가진 하나의 상자 
 
+## 훅(HOOK) 의 규칙
+### 1. 혹은 무조건 최상위 레벨에서만 호출해야 한다는 것
+반복문이나 조건문 또는 중첩된 함수들 안에서 호출하면 안 됨 \
+혹은 컴포넌트가 렌더링될 때마다 매번 같은 순서로 호출되어야 함 \
+EX)
+```c
+  function MyComponent( props ) {
+    const [name, setName] = useState( 'Inje' );
 
+    if( name != '' ) {
+      useEffect(() => {
+        .......
+      });
+    }
+  }
+```
+위의 코드는 잘못된 코드 \
 
+### 2. 두 번째 규칙은 리액트 함수 컴포넌트에서만 훅을 호출해야 한다는 것 
+일반적인 자바스크립트 함수에서 훅을 호출하면 안됨 \
+또는 리액트 함수 컴포넌트에서 호출 하거나 직접 만든 커스텀 훅에서만 호출할 수 있음
 
+### 커스텀 훅
+추가적인 훅을 만들어야 할 때 사용
+예제는 chapter_07의 customHook.jsx 참조
+ 
 
 # 복습 생명주기 
 ## 1. 마운트 componentDidMount()
