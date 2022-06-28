@@ -24,13 +24,56 @@ useEffect()는 사이드 이펙트를 수행하기 위한 훅
 ## 3. useMemo
 Memoized value를 리턴하는 훅
 ### `문법`
-EX ) const momoizedValue = useMemo (  \
-        () => { \
-          // 연산량이 높은 작업을 수행하여 결과를 반환 \
-          return computeExpensiveValue( 의존성 변수 1, 의존성 변수 2 ); \
-        }, \
-        [의존성 변수1, 의존성 변수2] \
-    ); \
+
+```c
+   const momoizedValue = useMemo (  
+        () => { 
+          // 연산량이 높은 작업을 수행하여 결과를 반환 
+          return computeExpensiveValue( 의존성 변수 1, 의존성 변수 2 ); 
+        }, 
+        [의존성 변수1, 의존성 변수2] 
+    ); 
+```
+
+의존성 배열에 들어있는 변수가 변했을 경우에만 새로 create 함수를 호출하여 결괏값을 반환 \
+그렇지 않은 경우에는 기존 함수의 결괏값을 그대로 반환 \
+useMemo() 훅을 사용하면 컴포넌트가 다시 렌더링 될 때마다 \
+연산량이 높은 작업을 반복하는 것을 피할수 있음 \
+
+** useMemo() 훅을 사용할 때 기억해야 할 점은 \
+   1. \
+   useMemo()로 전달된 함수는 렌더링이 일어나는 동안 실행된다는 점 \
+   그렇기 때문에 일반적으로 렌더링이 일어나는 동안 실행돼서는 안될 \
+   작업을 useMemo()의 함수에 넣으면 안됨 \
+   EX ) useEffect() 훅에서 실행돼야 할 사이드 이펙트 등
+
+   2. \
+   의존성 배열을 꼭 넣어야함 , 빈 배열을 넣게 되면 마운트 시에만 함수가 실행 됨
+**
+
+```c
+  const memorizedValue = useMemo(
+    () => computeExpensiveValue( a, b )
+  );
+```
+
+## 4. useCallback
+이전에 나온 useMemo와 유사한 역할
+한 가지 차이점은 **값이 아닌 함수를 반환한다는 점 **
+### `문법`
+```c
+  const memorizedCallback = useCallback(
+    () => {
+      doSomething( 의존성 변수1, 의존성 변수2 ); 
+    },
+    [의존성 변수1, 의존성 변수2]
+  );
+```
+useCallback( function, dependencies) == useMemo( () => function, dependencies ) 와 동일 \
+
+
+
+
 
 
 
