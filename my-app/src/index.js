@@ -11,16 +11,26 @@ import reportWebVitals from './reportWebVitals';
 //import Accommodate from './chapter_07/Accommodate';
 //import ConfirmButton from './chapter_08/ConfirmButton';
 //import LandingPage from './chapter_09/LandingPage';
-import AttendanceBook from './chapter_10/AttendanceBook';
+//import AttendanceBook from './chapter_10/AttendanceBook';
+import SignUp from './chapter_11/SignUp';
+
 const root = ReactDOM.createRoot( document.getElementById( 'root' ) );
 
-//10장
+//11장
 root.render(
   <React.StrictMode>
-    <AttendanceBook />
+    <SignUp />
   </React.StrictMode>,
   document.getElementById( 'root' )
 );
+
+//10장
+// root.render(
+//   <React.StrictMode>
+//     <AttendanceBook />
+//   </React.StrictMode>,
+//   document.getElementById( 'root' )
+// );
 
 //9장
 // root.render(
